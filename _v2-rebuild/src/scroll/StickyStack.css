@@ -1,0 +1,65 @@
+/* ============================================================
+   StickyStack
+   Radius 0 everywhere. Transform and opacity only.
+   ============================================================ */
+
+.sstack {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.sstack__card {
+  position: relative;
+  min-height: 100dvh;
+  border-radius: 0;
+}
+
+/* GSAP pins .sstack__card and animates .sstack__inner, so the pin
+   never has to share a transform with the scale tween. */
+.sstack__inner {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--ground);
+  border-radius: 0;
+}
+
+.sstack:not(.sstack--static) .sstack__inner {
+  will-change: transform, opacity;
+}
+
+/* ---- Fallback: plain vertical stack under reduced motion. ---- */
+.sstack--static .sstack__card {
+  min-height: 0;
+}
+
+.sstack--static .sstack__inner {
+  min-height: 0;
+  transform: none;
+  opacity: 1;
+  will-change: auto;
+}
+
+/* A single hairline so consecutive cards stay legible once they no
+   longer overlap. One rule only, never top and bottom together. */
+.sstack--static .sstack__card + .sstack__card {
+  border-top: 1px solid var(--line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sstack__card {
+    min-height: 0;
+  }
+
+  .sstack__inner {
+    min-height: 0;
+    transform: none;
+    opacity: 1;
+    will-change: auto;
+  }
+
+  .sstack__card + .sstack__card {
+    border-top: 1px solid var(--line);
+  }
+}

@@ -1,0 +1,54 @@
+/* ============================================================
+   WEBGL LAYER
+   Fixed full viewport, behind every bit of content, never
+   interactive. Owned by src/webgl. Tokens come from
+   src/styles/tokens.css and are read only here.
+   ============================================================ */
+
+.webgl-layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-webgl);
+  pointer-events: none;
+  overflow: hidden;
+  /* The field is atmosphere behind the page, not a foreground graphic.
+     At full strength it competed with body copy for legibility. */
+  opacity: var(--webgl-opacity);
+  /* No 'contain' here. It suppressed the ResizeObserver that R3F uses to size
+     its drawing buffer, leaving the canvas rendering at 300x150 and upscaling. */
+}
+
+/* Defensive floor. If R3F's measurement is ever late or missed, the canvas
+   still fills the layer instead of collapsing to its intrinsic 300x150. */
+.webgl-layer canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Static stand in for the canvas: below 768px, with no WebGL, and
+   during the brief window before the canvas chunk arrives. Same
+   box, same stacking, so swapping it out shifts nothing.
+   Built from the same two tokens the shader reads. */
+.webgl-layer__fallback {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  background-image:
+    radial-gradient(
+      58% 46% at 24% 26%,
+      rgba(var(--webgl-accent), 0.13) 0%,
+      rgba(var(--webgl-accent), 0.04) 42%,
+      rgba(var(--webgl-accent), 0) 70%
+    ),
+    radial-gradient(
+      44% 52% at 82% 72%,
+      rgba(var(--webgl-accent), 0.07) 0%,
+      rgba(var(--webgl-accent), 0) 66%
+    ),
+    radial-gradient(
+      120% 90% at 50% 44%,
+      rgba(var(--webgl-ink), 0) 34%,
+      rgba(var(--webgl-ink), 0.42) 100%
+    );
+}

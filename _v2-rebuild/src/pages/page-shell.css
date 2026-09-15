@@ -1,0 +1,158 @@
+/* ============================================================
+   PAGE SHELL - shared primitives for the secondary routes.
+   Owned by the Pages lane. Prefix: pg-
+   Tokens come from src/styles/tokens.css. Radius is 0 everywhere.
+   ============================================================ */
+
+.pg-main {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+/* --- Page masthead ------------------------------------------------ */
+
+.pg-head {
+  padding-block: clamp(7rem, 14vw, 11rem) clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.pg-head__title {
+  max-width: 20ch;
+}
+
+.pg-head__lede {
+  margin-top: var(--space-6);
+  max-width: 54ch;
+  color: var(--text-2);
+}
+
+/* --- Placeholder slots -------------------------------------------
+   Every unwritten copy slot renders through one of these so the page
+   reads as unfinished on purpose rather than as fake biography. */
+
+.pg-slot {
+  max-width: 62ch;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--accent);
+  color: var(--text-2);
+}
+
+.pg-slot + .pg-slot {
+  margin-top: var(--space-4);
+}
+
+.pg-slot--head {
+  border-left: 0;
+  padding-left: 0;
+  padding-bottom: 0.12em;
+  color: var(--text);
+  box-shadow: inset 0 -2px 0 0 var(--accent);
+}
+
+/* Inline placeholder for a value that will become a number or a proper
+   noun. Never fake-precise. Contract section 0.1. */
+.pg-dash {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-micro);
+  color: var(--accent-text);
+}
+
+/* --- Micro labels (not eyebrows: never sit above a headline) ------- */
+
+.pg-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+/* --- Rules and bands ---------------------------------------------- */
+
+.pg-rule {
+  height: 1px;
+  border: 0;
+  background: var(--line);
+}
+
+.pg-band {
+  background: var(--ground-2);
+}
+
+.pg-surface {
+  background: var(--ground-3);
+  border: 1px solid var(--line);
+  border-radius: 0;
+}
+
+/* --- Generic 12 column grid --------------------------------------- */
+
+.pg-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+@media (max-width: 767px) {
+  .pg-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+/* --- Composed non-happy-path states -------------------------------- */
+
+.pg-state {
+  display: grid;
+  gap: var(--space-6);
+  justify-items: start;
+  max-width: 46ch;
+  padding: clamp(2rem, 5vw, 4rem);
+  background: var(--ground-3);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--accent);
+}
+
+.pg-state__icon {
+  color: var(--accent-text);
+}
+
+.pg-state__body {
+  color: var(--text-2);
+}
+
+.pg-state__code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--text-2);
+  word-break: break-all;
+}
+
+/* --- Skeletons. Shaped like the real content, never a spinner. ----- */
+
+.pg-skel {
+  background: var(--line);
+  animation: pg-skel-pulse 1400ms var(--ease-in-out) infinite;
+}
+
+@keyframes pg-skel-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-skel { animation: none; opacity: 0.7; }
+}
+
+/* --- Inline text link ---------------------------------------------- */
+
+.pg-inline-link {
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.pg-inline-link:hover {
+  text-decoration-thickness: 2px;
+}

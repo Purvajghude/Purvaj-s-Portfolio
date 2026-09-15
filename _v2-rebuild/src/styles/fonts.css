@@ -1,0 +1,11 @@
+/* Self-hosted variable fonts. Never link Google Fonts in production. */
+/* Bricolage: wdth.css carries both the wght (200-800) and wdth (75-100) axes. */
+@import '@fontsource-variable/bricolage-grotesque/wdth.css';
+@import '@fontsource-variable/geist/index.css';
+@import '@fontsource-variable/geist-mono/index.css';
+
+:root {
+  --font-display: 'Bricolage Grotesque Variable', 'Geist Variable', system-ui, sans-serif;
+  --font-body: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
+}

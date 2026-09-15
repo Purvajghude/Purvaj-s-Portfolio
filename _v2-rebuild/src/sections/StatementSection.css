@@ -1,0 +1,29 @@
+/* Section 3: full-bleed-statement.
+   No container max-width. The sentence runs gutter to gutter so it reads as
+   a different kind of block from every other section on the page. */
+
+.statement {
+  position: relative;
+  z-index: var(--z-content);
+  padding-block: clamp(8rem, 18vw, 16rem);
+  /* Transparent on purpose: the persistent WebGL field reads through here.
+     The page ground is painted once on body. */
+  background: transparent;
+}
+
+.statement__bleed {
+  inline-size: 100%;
+  padding-inline: var(--gutter);
+}
+
+.statement__text {
+  max-inline-size: none;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6.5vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: var(--track-display);
+  text-wrap: pretty;
+  /* Descender clearance for g, p, y at display size. */
+  padding-bottom: 0.08em;
+}

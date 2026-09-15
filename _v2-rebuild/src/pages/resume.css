@@ -1,0 +1,208 @@
+/* ============================================================
+   RESUME - clustered rows and a card per item. Prefix: rs-
+   No default list with a hairline under every row. Contract section 6.
+   ============================================================ */
+
+.rs-body {
+  padding-top: 0;
+}
+
+.rs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.rs-section + .rs-section {
+  padding-top: clamp(4rem, 9vw, 7rem);
+  margin-top: clamp(4rem, 9vw, 7rem);
+  border-top: 1px solid var(--line-strong);
+}
+
+.rs-section__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+/* --- Card per item -------------------------------------------------- */
+
+.rs-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+/* Reveal wraps each card, so the wrapper carries the stretch. */
+.rs-cards > * {
+  height: 100%;
+}
+
+.rs-card {
+  display: grid;
+  align-content: start;
+  height: 100%;
+  gap: var(--space-3);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--ground-3);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--accent);
+  border-radius: 0;
+}
+
+.rs-card__period {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-micro);
+  color: var(--accent-text);
+}
+
+.rs-card__org {
+  color: var(--text-2);
+}
+
+.rs-card__note {
+  margin-top: var(--space-2);
+}
+
+/* --- Skill clusters. Sparse rules, no hairline per line. ------------ */
+
+.rs-cluster {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: var(--gutter);
+  padding-block: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.rs-cluster + .rs-cluster {
+  border-top: 1px solid var(--line);
+}
+
+.rs-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rs-tag {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+/* --- Single column below md, declared explicitly -------------------- */
+
+@media (max-width: 767px) {
+  .rs-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rs-cluster {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+/* --- Print. Flatten to one readable column. ------------------------- */
+
+@media print {
+  .rs-print-hide {
+    display: none !important;
+  }
+
+  .rs-page {
+    color: #101012;
+  }
+
+  .rs-page .pg-head {
+    padding-block: 0 1.5rem;
+  }
+
+  .rs-page .u-section {
+    padding-block: 0;
+  }
+
+  .rs-page .u-h1 {
+    font-size: 1.75rem;
+  }
+
+  .rs-page .u-h2 {
+    font-size: 1.15rem;
+  }
+
+  .rs-page .u-h3 {
+    font-size: 1rem;
+  }
+
+  .rs-page .pg-slot {
+    padding-left: 0;
+    border-left: 0;
+    color: #3A3A3E;
+  }
+
+  .rs-page .pg-label,
+  .rs-page .rs-card__org {
+    color: #3A3A3E;
+  }
+
+  .rs-page .rs-card__period,
+  .rs-page .pg-dash {
+    color: #101012;
+  }
+
+  .rs-section + .rs-section {
+    padding-top: 1.25rem;
+    margin-top: 1.25rem;
+    border-top: 1px solid #C8C8C4;
+  }
+
+  .rs-section__head {
+    margin-bottom: 0.75rem;
+  }
+
+  .rs-cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .rs-card {
+    padding: 0 0 0 0.75rem;
+    background: transparent;
+    border: 0;
+    border-left: 2px solid #101012;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .rs-cluster {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.35rem;
+    padding-block: 0.6rem;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .rs-cluster + .rs-cluster {
+    border-top: 1px solid #C8C8C4;
+  }
+
+  .rs-tag {
+    padding: 0;
+    border: 0;
+    color: #101012;
+  }
+
+  .rs-tags {
+    gap: 0.25rem 0.9rem;
+  }
+}

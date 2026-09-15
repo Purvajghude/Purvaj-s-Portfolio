@@ -1,0 +1,57 @@
+/* ============================================================
+   KineticHeadline
+   Size, weight and tracking come from the class the caller passes
+   (u-display, u-h1, u-h2). This file only owns the line masks and
+   the wdth axis, so it never fights the type primitives in base.css.
+   ============================================================ */
+
+.kh {
+  font-family: var(--font-display);
+  border-radius: 0;
+}
+
+/* Each line is its own mask. padding-bottom keeps descenders visible
+   inside the clip, the negative margin gives the leading back. */
+.kh__line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.06em;
+}
+
+.kh__inner {
+  display: block;
+  will-change: transform;
+}
+
+/* Pre-JS state for the animated case: narrow and masked out. */
+.kh--kinetic {
+  font-variation-settings: 'wdth' 75;
+}
+
+.kh--kinetic .kh__inner {
+  transform: translateY(108%);
+}
+
+/* ---- Fallback: static, full width, fully visible. ---- */
+.kh--static {
+  font-variation-settings: 'wdth' 100;
+}
+
+.kh--static .kh__inner {
+  transform: none;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kh,
+  .kh--kinetic {
+    font-variation-settings: 'wdth' 100;
+  }
+
+  .kh .kh__inner,
+  .kh--kinetic .kh__inner {
+    transform: none;
+    will-change: auto;
+  }
+}

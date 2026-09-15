@@ -1,0 +1,84 @@
+/* ============================================================
+   HorizontalPan
+   Radius 0 everywhere. Transform only, never width or left.
+   ============================================================ */
+
+.hpan {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.hpan__viewport {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.hpan__track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  height: 100%;
+}
+
+.hpan:not(.hpan--static) .hpan__track {
+  will-change: transform;
+}
+
+/* One panel is one viewport. The pan distance is measured against
+   window.innerWidth, so the panel basis has to be 100vw to match. */
+.hpan__panel {
+  flex: 0 0 100vw;
+  max-width: 100vw;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0;
+}
+
+/* ---- Fallback: native scroll-snap strip.
+        Used below 768px and whenever reduced motion is set. ---- */
+.hpan--static .hpan__viewport {
+  height: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hpan--static .hpan__track {
+  height: auto;
+  transform: none;
+}
+
+.hpan--static .hpan__panel {
+  flex: 0 0 100%;
+  max-width: 100%;
+  height: auto;
+  scroll-snap-align: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hpan__viewport {
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+  }
+
+  .hpan__track {
+    height: auto;
+    transform: none;
+    will-change: auto;
+  }
+
+  .hpan__panel {
+    flex: 0 0 100%;
+    max-width: 100%;
+    height: auto;
+    scroll-snap-align: start;
+  }
+}

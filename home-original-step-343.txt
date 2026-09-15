@@ -1,0 +1,68 @@
+Created At: 2026-07-06T11:31:22Z
+Completed At: 2026-07-06T11:31:22Z
+File Path: `file:///c:/Users/Rover/GitHub/Personal%20portfolio/react-portfolio/src/pages/Home.jsx`
+Total Lines: 423
+Total Bytes: 24001
+Showing lines 1 to 60
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: 
+2: import React from 'react';
+3: import { motion } from 'framer-motion';
+4: import { Link } from 'react-router-dom';
+5: 
+6: export default function Home() {
+7:   return (
+8:     <motion.div 
+9:       initial={{ opacity: 0, y: 10 }} 
+10:       animate={{ opacity: 1, y: 0 }} 
+11:       exit={{ opacity: 0, y: -10 }} 
+12:       transition={{ type: 'spring', stiffness: 300, damping: 25, mass: 0.5 }}
+13:     >
+14:       
+15:   <div className="noise" aria-hidden="true"></div>
+16:   
+17: 
+18:   <main id="app" tabindex="-1">
+19:     <div className="page home-page">
+20:       <motion.section className="home-hero grid-paper reveal revealed" initial={{opacity: 0, y: 30}} whileInView={{opacity: 1, y: 0}} viewport={{once: true}} transition={{type: "spring", stiffness: 120, damping: 14, mass: 0.8}}>
+21:         <div className="hero-copy">
+22:           <div className="phase-chip"><span>01</span> Discovery starts here</div>
+23:           <p className="intro-hand">Hello, I’m</p>
+24:           <h1>Purvaj<span>G.</span></h1>
+25:           <svg className="name-underline" viewBox="0 0 560 36" aria-hidden="true">
+26:             <path d="M4 24C108 4 215 34 330 14c72-12 149-3 226 7" />
+27:           </svg>
+28:           <p className="hero-lede">I turn complex products into clear, useful experiences. I also help design teams do their
+29:             best work.</p>
+30:           <div className="hero-actions">
+31:             <Link to="/work" className="button route-link bound">Explore selected work <svg viewBox="0 0 24 24"
+32:                 aria-hidden="true">
+33:                 <path d="M5 12h13M13 6l6 6-6 6" />
+34:               </svg></Link>
+35:             <Link to="/about" className="text-link route-link bound">A little about me ↗</Link>
+36:           </div>
+37:         </div>
+38:         <div className="sticky-cluster" aria-label="Quick facts about Ariharan">
+39:           <article className="sticky sticky-yellow draggable" style={{"--r":"-5deg","--x":"24%"}}>
+40:             <span className="pin"></span>
+41:             <small>Currently</small>
+42:             <strong>UX Manager</strong>
+43:             <p>@ Syncfusion®</p>
+44:           </article>
+45:           <article className="sticky sticky-blue draggable" style={{"--r":"4deg","--x":"46%"}}>
+46:             <span className="tape"></span>
+47:             <small>Experience</small>
+48:             <strong>4.5+ years</strong>
+49:             <p>designing &amp; leading</p>
+50:           </article>
+51:           <article className="sticky sticky-pink draggable" style={{"--r":"-2deg","--x":"23%"}}>
+52:             <span className="pin"></span>
+53:             <small>Focus</small>
+54:             <strong>Enterprise<br />SaaS</strong>
+55:             <p>+ <mark>AI Innovation</mark></p>
+56:           </article>
+57:           <p className="drag-note">you can move these around ↗</p>
+58:         </div>
+59:         <div className="scroll-cue"><span></span> Scroll to investigate</div>
+60:       </motion.section>
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.

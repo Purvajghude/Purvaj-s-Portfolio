@@ -1,0 +1,134 @@
+/* ============================================================
+   DESIGN TOKENS - see DESIGN_CONTRACT.md sections 1, 2, 3
+   One accent (vermilion). One radius (0). One theme at a time.
+   Every color is defined on :root first, then overridden.
+   Never define a color only inside a media query.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* --- Ground + text (LIGHT) --- */
+  --ground: #E8E8E5;
+  --ground-2: #DEDEDA;
+  --ground-3: #F5F5F3;
+  --line: rgba(16, 16, 18, 0.12);
+  --line-strong: rgba(16, 16, 18, 0.26);
+  --text: #101012;
+  --text-2: rgba(16, 16, 18, 0.64);
+  /* DECORATION ONLY. Never use as a text color: 2.54:1 light / 3.24:1 dark,
+     which fails WCAG AA. Tertiary hierarchy comes from size, case and
+     tracking (see .u-eyebrow), never from lowering contrast. */
+  --text-3: rgba(16, 16, 18, 0.40);
+
+  /* --- The single accent --- */
+  --accent: #E63A0B;        /* fills, rules, graphics */
+  --accent-text: #B82D08;   /* accent used AS text: 4.89:1 on --ground */
+  --on-accent: #0B0B0D;     /* text ON an accent fill: 4.6:1 */
+
+  /* WebGL layer reads these so the 3D matches the theme */
+  --webgl-ink: 232, 232, 229;
+  --webgl-accent: 230, 58, 11;
+  --webgl-opacity: 0.5;
+  --grain-opacity: 0.032;
+
+  /* --- Type scale (fluid) --- */
+  --fs-display: clamp(2.75rem, 8vw, 7rem);
+  --fs-h1: clamp(2.5rem, 7vw, 6rem);
+  --fs-h2: clamp(2rem, 4.5vw, 3.75rem);
+  --fs-h3: clamp(1.25rem, 2vw, 1.75rem);
+  --fs-body: clamp(1rem, 1.05vw, 1.125rem);
+  --fs-small: 0.875rem;
+  --fs-micro: 0.75rem;
+
+  --lh-display: 0.92;
+  --lh-h1: 0.95;
+  --lh-h2: 1.02;
+  --lh-h3: 1.15;
+  --lh-body: 1.6;
+
+  --track-display: -0.03em;
+  --track-micro: 0.14em;
+
+  /* --- Space + layout --- */
+  --container: 1440px;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --section-y: clamp(6rem, 12vw, 11rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  --header-h: 72px;
+
+  /* --- Shape: locked at zero. Do not add a radius token. --- */
+  --radius: 0;
+
+  /* --- Z-index scale. Do not invent values outside this set. --- */
+  --z-webgl: 0;
+  --z-content: 10;
+  --z-header: 40;
+  --z-overlay: 60;
+  --z-grain: 80;
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 620ms;
+}
+
+/* --- DARK: explicit opt-in via the toggle --- */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --ground: #0B0B0D;
+  --ground-2: #131316;
+  --ground-3: #1C1C21;
+  --line: rgba(255, 255, 255, 0.10);
+  --line-strong: rgba(255, 255, 255, 0.24);
+  --text: #F2F1EE;
+  --text-2: rgba(242, 241, 238, 0.62);
+  --text-3: rgba(242, 241, 238, 0.38);
+
+  --accent: #FF4A1C;        /* 5.8:1 on --ground */
+  --accent-text: #FF6A42;   /* 6.87:1 on --ground */
+  --on-accent: #0B0B0D;     /* 5.8:1 */
+
+  --webgl-ink: 11, 11, 13;
+  --webgl-accent: 255, 74, 28;
+  --webgl-opacity: 0.45;
+  --grain-opacity: 0.05;
+}
+
+/* --- DARK: system preference, unless the user chose light explicitly --- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --ground: #0B0B0D;
+    --ground-2: #131316;
+    --ground-3: #1C1C21;
+    --line: rgba(255, 255, 255, 0.10);
+    --line-strong: rgba(255, 255, 255, 0.24);
+    --text: #F2F1EE;
+    --text-2: rgba(242, 241, 238, 0.62);
+    --text-3: rgba(242, 241, 238, 0.38);
+
+    --accent: #FF4A1C;
+    --accent-text: #FF6A42;
+    --on-accent: #0B0B0D;
+
+    --webgl-ink: 11, 11, 13;
+    --webgl-accent: 255, 74, 28;
+    --webgl-opacity: 0.45;
+    --grain-opacity: 0.05;
+  }
+}

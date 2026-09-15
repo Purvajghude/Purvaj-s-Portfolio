@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- TODO(content): replace the description with a real one, max 155 chars. -->
+  <title>Purvaj Ghude</title>
+  <meta name="description" content="Portfolio of Purvaj Ghude." />
+
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#E8E8E5" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0B0B0D" media="(prefers-color-scheme: dark)" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+  <!-- Fonts are self-hosted through fontsource and imported from src/styles/fonts.css.
+       Do not add a Google Fonts <link> here; it is banned by DESIGN_CONTRACT.md. -->
+
+  <!--
+    Applies the stored theme before first paint so the page never flashes the
+    wrong ground. Must stay inline and must stay above the app script.
+  -->
+  <script>
+    (function () {
+      try {
+        var v = localStorage.getItem('pg-theme');
+        if (v === 'light' || v === 'dark') {
+          document.documentElement.setAttribute('data-theme', v);
+        }
+      } catch (e) {
+        /* Blocked storage just means we follow the system preference. */
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>

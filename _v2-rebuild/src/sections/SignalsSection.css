@@ -1,0 +1,70 @@
+/* Section 6: bare-metrics.
+   No card, no fill, no progress track. One hairline along the top of each
+   figure is the only structure, and there is no matching bottom rule. */
+
+.signals {
+  /* Transparent on purpose: the persistent WebGL field reads through here.
+     The page ground is painted once on body. */
+  background: transparent;
+}
+
+.signals__head {
+  display: grid;
+  row-gap: var(--space-4);
+  margin-block-end: clamp(3rem, 8vw, 6rem);
+}
+
+.signals__title {
+  padding-bottom: 0.04em;
+}
+
+.signals__sub {
+  color: var(--text-2);
+}
+
+.signals__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  margin: 0;
+}
+
+.signal {
+  display: grid;
+  row-gap: var(--space-3);
+  padding-block-start: clamp(1rem, 2vw, 1.5rem);
+  border-block-start: 1px solid var(--line-strong);
+}
+
+.signal__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.signal__value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: var(--track-display);
+  color: var(--text);
+  padding-bottom: 0.06em;
+}
+
+/* Explicit collapse: single column below 768px, two up to 1024, four above. */
+@media (min-width: 768px) {
+  .signals__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .signals__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

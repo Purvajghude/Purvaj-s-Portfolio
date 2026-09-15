@@ -1,0 +1,36 @@
+/* ============================================================
+   ScrubStatement
+   Words are inline-block spans separated by real spaces, so the
+   sentence still wraps and still reads in order to a screen reader.
+   ============================================================ */
+
+.sstmt {
+  color: var(--text);
+}
+
+.sstmt__word {
+  --w: 0;
+  display: inline-block;
+  color: var(--text);
+}
+
+/* The scrub target. --w goes 0 to 1, mixing the two live tokens, so
+   a theme change is picked up without re-reading any colour in JS. */
+@supports (color: color-mix(in srgb, red 50%, blue)) {
+  .sstmt--kinetic .sstmt__word {
+    color: color-mix(in srgb, var(--text) calc(var(--w) * 100%), var(--text-2));
+  }
+}
+
+/* ---- Fallback: every word at its final colour immediately. ---- */
+.sstmt--static .sstmt__word {
+  color: var(--text);
+}
+
+/* CSS-only backstop. Specificity matches the @supports rule above and
+   sits later in the sheet, so it wins even if JS never branched. */
+@media (prefers-reduced-motion: reduce) {
+  .sstmt .sstmt__word {
+    color: var(--text);
+  }
+}

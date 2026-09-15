@@ -1,0 +1,77 @@
+/* Section 1: hero-asymmetric.
+   Mobile first single column. The 12 column asymmetric grid is declared
+   explicitly at min-width 768px and nowhere else (contract 3). */
+
+.hero {
+  position: relative;
+  z-index: var(--z-content);
+  display: grid;
+  align-content: center;
+  min-height: 100dvh;           /* dvh only, the static viewport unit is banned */
+  /* Transparent on purpose: the persistent WebGL field reads through here.
+     The page ground is painted once on body. */
+  background: transparent;
+  /* Contract 5: padding-top caps at 6rem on desktop. */
+  padding-block-start: clamp(4rem, 8vw, 6rem);
+  padding-block-end: clamp(3rem, 7vw, 6rem);
+  overflow: clip;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: clamp(1.5rem, 3.5vw, 2.75rem);
+  align-items: start;
+}
+
+.hero__eyebrow {
+  margin: 0;
+}
+
+.hero__headline {
+  /* Descender clearance for the display line. */
+  padding-bottom: 0.06em;
+}
+
+.hero__sub {
+  color: var(--text-2);
+}
+
+.hero__ctas {
+  display: grid;
+  grid-template-columns: minmax(0, max-content);
+  justify-content: start;
+  gap: var(--space-4);
+}
+
+/* Decorative accent bar, desktop only. Hidden here so mobile stays quiet. */
+.hero__mark {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hero__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--space-6);
+  }
+
+  /* Deliberately off-center: mass on the left, subtext pushed right and low. */
+  .hero__eyebrow { grid-column: 1 / 7; grid-row: 1; }
+  .hero__headline { grid-column: 1 / 11; grid-row: 2; }
+  .hero__sub { grid-column: 6 / 12; grid-row: 3; }
+  .hero__ctas {
+    grid-column: 1 / 6;
+    grid-row: 4;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+  }
+
+  .hero__mark {
+    display: block;
+    grid-column: 12 / 13;
+    grid-row: 2 / 4;
+    align-self: stretch;
+    justify-self: end;
+    inline-size: clamp(0.5rem, 1.1vw, 0.875rem);
+    background: var(--accent);
+  }
+}

@@ -1,0 +1,123 @@
+/* Section 4: horizontal-pan.
+   HorizontalPan owns the track, the pin and the scrub. Everything here only
+   describes what one panel looks like. */
+
+.work {
+  position: relative;
+  z-index: var(--z-content);
+  /* Translucent so the WebGL field stays faintly continuous behind
+     dense content, without costing text contrast. */
+  background: color-mix(in srgb, var(--ground) 86%, transparent);
+}
+
+.work__head {
+  padding-block-start: var(--section-y);
+  padding-block-end: clamp(2rem, 5vw, 4rem);
+}
+
+.work__eyebrow {
+  margin-block-end: var(--space-4);
+}
+
+.work__title {
+  padding-bottom: 0.04em;
+}
+
+/* One panel. HorizontalPan wraps this in .hpan__panel, which is one full
+   viewport wide, so the panel only has to centre itself inside that cell. */
+.panel {
+  inline-size: 100%;
+  max-inline-size: 64rem;
+  margin-inline: auto;
+  block-size: 100%;
+  padding-inline: var(--gutter);
+  padding-block: clamp(1.5rem, 5vh, 3rem);
+}
+
+.panel__inner {
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: clamp(1.25rem, 2.5vw, 2rem);
+  block-size: 100%;
+  align-content: center;
+}
+
+.panel__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--ground-3);
+  border: 1px solid var(--line);
+}
+
+.panel__img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.panel:hover .panel__img,
+.panel:focus-within .panel__img {
+  transform: scale(1.03);
+}
+
+.panel__meta {
+  display: grid;
+  row-gap: var(--space-3);
+}
+
+.panel__title {
+  padding-bottom: 0.04em;
+}
+
+.panel__link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.panel__link:hover {
+  color: var(--accent-text);
+}
+
+.panel__link:active {
+  transform: translateY(1px);
+}
+
+.panel__line {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--text-2);
+  max-inline-size: 48ch;
+}
+
+/* Below 768px HorizontalPan degrades to a scroll-snap strip of auto height, so
+   the ratio above is what reserves the image box. There is no second column at
+   any width, so nothing has to collapse.
+   At 768px and up the pan is pinned inside a 100dvh viewport: the media takes
+   whatever height is left instead of holding a ratio, which is what keeps a
+   panel from overflowing the pin. Row height is fixed, so there is no shift. */
+@media (min-width: 768px) {
+  .panel__inner {
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .panel__media {
+    aspect-ratio: auto;
+    block-size: 100%;
+  }
+}
+
+/* Reduced motion also drops the pin, so hand the ratio back. */
+@media (prefers-reduced-motion: reduce) {
+  .panel__inner {
+    grid-template-rows: auto auto;
+  }
+
+  .panel__media {
+    aspect-ratio: 16 / 10;
+    block-size: auto;
+  }
+}

@@ -1,0 +1,37 @@
+/* Section 8: closing-manifesto.
+   One line at display size, one CTA, and deliberately nothing else. */
+
+.closing {
+  /* Transparent on purpose: the persistent WebGL field reads through here.
+     The page ground is painted once on body. */
+  background: transparent;
+  padding-block: clamp(8rem, 16vw, 14rem);
+}
+
+.closing__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: clamp(2.5rem, 6vw, 4.5rem);
+  justify-items: start;
+}
+
+.closing__line {
+  max-inline-size: 16ch;
+  /* Italic descender clearance is handled by u-italic-clear on the span, but
+     the block needs room too. */
+  line-height: 0.98;
+  padding-bottom: 0.1em;
+}
+
+.closing__cta {
+  display: grid;
+  grid-template-columns: minmax(0, max-content);
+}
+
+/* The section is one column at every width, so there is nothing to collapse
+   below 768px. Only the indentation of the CTA changes. */
+@media (min-width: 768px) {
+  .closing__cta {
+    margin-inline-start: clamp(0rem, 8vw, 10rem);
+  }
+}

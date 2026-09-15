@@ -1,0 +1,78 @@
+/* Section 5: sticky-stack.
+   StickyStack owns the pin, the scale down and the fade. These rules only
+   describe one card. */
+
+/* StickyStack paints .sstack__inner with --ground for the full pinned height,
+   so the band is --ground and the cards sit on it as --ground-3. */
+.process {
+  position: relative;
+  z-index: var(--z-content);
+  /* Translucent so the WebGL field stays faintly continuous behind
+     dense content, without costing text contrast. */
+  background: color-mix(in srgb, var(--ground) 86%, transparent);
+}
+
+.process__head {
+  padding-block-start: var(--section-y);
+  padding-block-end: clamp(2rem, 5vw, 4rem);
+}
+
+.process__title {
+  padding-bottom: 0.04em;
+}
+
+/* The card lives inside .sstack__inner, which is a full width column flex box,
+   so the card centres itself and keeps the page gutter. */
+.pcard {
+  inline-size: min(calc(100% - 2 * var(--gutter)), var(--container));
+  margin-inline: auto;
+  background: var(--ground-3);
+  border: 1px solid var(--line);
+  /* The single accent, on the leading edge of the card only. */
+  border-block-start: 2px solid var(--accent);
+}
+
+.pcard__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  row-gap: clamp(1rem, 2.5vw, 1.75rem);
+  min-block-size: min(64dvh, 30rem);
+  padding: clamp(1.75rem, 5vw, 4.5rem);
+}
+
+.pcard__verb {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  /* Descender clearance: the real verbs may contain g, p, y. */
+  line-height: 1.02;
+  padding-bottom: 0.08em;
+}
+
+.pcard__line {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-2);
+  max-inline-size: 52ch;
+}
+
+/* The card stays one column at every width, so nothing needs to collapse below
+   768px. Verb and line are stacked, never a big-left plus small-right split. */
+@media (min-width: 768px) {
+  .pcard__inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .pcard__line {
+    /* Indented, not floated into a second column. */
+    margin-inline-start: clamp(0rem, 6vw, 8rem);
+  }
+}
+
+/* Reduced motion drops the pin and the cards become a plain vertical stack,
+   so they need real space between them. */
+@media (prefers-reduced-motion: reduce) {
+  .pcard {
+    margin-block: clamp(1rem, 3vw, 2rem);
+  }
+}

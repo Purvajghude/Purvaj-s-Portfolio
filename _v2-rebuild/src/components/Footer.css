@@ -1,0 +1,80 @@
+.site-footer {
+  position: relative;
+  z-index: var(--z-content);
+  border-top: 1px solid var(--line);
+  background: var(--ground);
+  padding-top: clamp(3rem, 7vw, 5.5rem);
+}
+
+.site-footer__inner {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: grid;
+  grid-template-columns: 1.6fr 0.7fr 0.7fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.site-footer__name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.site-footer__line {
+  margin-top: var(--space-2);
+  color: var(--text-2);
+  font-size: var(--fs-small);
+  max-width: 34ch;
+}
+
+.site-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.site-footer__heading {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin-bottom: var(--space-1);
+}
+
+.site-footer__link {
+  color: var(--text-2);
+  font-size: var(--fs-small);
+  text-decoration: none;
+  width: fit-content;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.site-footer__link:hover { color: var(--accent-text); }
+
+.site-footer__base {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: var(--space-8) var(--gutter);
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.06em;
+  color: var(--text-2);
+}
+
+/* --- Below md: single column. Contract section 3. --- */
+@media (max-width: 767px) {
+  .site-footer__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}

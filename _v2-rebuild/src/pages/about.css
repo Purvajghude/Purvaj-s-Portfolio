@@ -1,0 +1,99 @@
+/* ============================================================
+   ABOUT - portrait, bio column, beliefs. Prefix: ab-
+   Collapses to one column below 768px.
+   ============================================================ */
+
+.ab-body {
+  padding-top: 0;
+}
+
+.ab-split {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: start;
+}
+
+.ab-portrait {
+  grid-column: 1 / 6;
+  position: sticky;
+  top: calc(var(--header-h) + var(--space-8));
+}
+
+.ab-portrait__frame {
+  background: var(--ground-2);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.ab-portrait__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ab-portrait__note {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+}
+
+.ab-bio {
+  grid-column: 7 / 13;
+}
+
+.ab-bio__lede {
+  margin-bottom: var(--space-8);
+}
+
+.ab-beliefs {
+  padding-top: clamp(4rem, 9vw, 7rem);
+  margin-top: clamp(4rem, 9vw, 7rem);
+  border-top: 1px solid var(--line-strong);
+}
+
+.ab-beliefs__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2.5rem, 6vw, 4.5rem) var(--gutter);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.ab-belief {
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--accent);
+}
+
+.ab-belief__body {
+  margin-top: var(--space-4);
+}
+
+.ab-cta {
+  display: grid;
+  gap: var(--space-6);
+  justify-items: start;
+  padding-top: clamp(3rem, 7vw, 5rem);
+  margin-top: clamp(3rem, 7vw, 5rem);
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 767px) {
+  .ab-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-12);
+  }
+
+  .ab-portrait,
+  .ab-bio {
+    grid-column: 1 / -1;
+  }
+
+  .ab-portrait {
+    position: static;
+    top: auto;
+  }
+
+  .ab-beliefs__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

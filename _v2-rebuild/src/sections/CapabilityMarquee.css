@@ -1,0 +1,62 @@
+/* Section 2: marquee. The only marquee on the page.
+   Two identical tracks sit side by side inside a max-content viewport.
+   Translating the viewport by exactly -50% lands track two where track one
+   started, so the loop is seamless with no JS. */
+
+.marquee {
+  position: relative;
+  z-index: var(--z-content);
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+  background: var(--ground-2);
+  overflow: hidden;
+}
+
+.marquee__viewport {
+  display: flex;
+  inline-size: max-content;
+  will-change: transform;
+  animation: marquee-shift 46s linear infinite;
+}
+
+.marquee__track {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  list-style: none;
+}
+
+.marquee__item {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding-inline-end: clamp(1.25rem, 3vw, 2.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: var(--track-display);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* Accent square as the separator. Never a middle dot (contract 6). */
+.marquee__item::after {
+  content: '';
+  flex: 0 0 auto;
+  inline-size: 0.18em;
+  block-size: 0.18em;
+  background: var(--accent);
+}
+
+@keyframes marquee-shift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* animation-name wins over the global !important animation-duration backstop. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__viewport {
+    animation-name: none;
+    animation: none;
+  }
+}

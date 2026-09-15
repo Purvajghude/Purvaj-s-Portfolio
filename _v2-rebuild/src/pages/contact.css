@@ -1,0 +1,200 @@
+/* ============================================================
+   CONTACT - accessible form with every required state. Prefix: ct-
+   Radius 0 on inputs and buttons. One accent, including for errors.
+   ============================================================ */
+
+.ct-body {
+  padding-top: 0;
+}
+
+.ct-split {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: start;
+}
+
+.ct-aside {
+  grid-column: 1 / 5;
+}
+
+.ct-panel {
+  grid-column: 6 / 13;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--ground-3);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--accent);
+}
+
+/* --- Aside: placeholder contact routes ------------------------------ */
+
+.ct-routes {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  list-style: none;
+  padding: 0;
+}
+
+.ct-route__value {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.ct-route__value:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* --- Fields --------------------------------------------------------- */
+
+.ct-fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-8);
+}
+
+.ct-fieldset[disabled] {
+  opacity: 0.6;
+}
+
+.ct-field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.ct-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.ct-help {
+  font-size: var(--fs-small);
+  color: var(--text-2);
+}
+
+.ct-input,
+.ct-textarea {
+  width: 100%;
+  padding: var(--space-4);
+  background: var(--ground);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.ct-textarea {
+  min-height: 10rem;
+  resize: vertical;
+}
+
+.ct-input::placeholder,
+.ct-textarea::placeholder {
+  color: var(--text-2);
+}
+
+.ct-input:hover,
+.ct-textarea:hover {
+  border-color: var(--text-2);
+}
+
+.ct-input:focus-visible,
+.ct-textarea:focus-visible {
+  border-color: var(--accent);
+}
+
+/* Invalid state. The site is locked to one accent, so focus and error would
+   otherwise share a border color. Focus is the base.css outline ring plus a
+   1px accent border; invalid is a uniform 2px accent border with no ring,
+   backed by the icon and message below. Uniform, not a single thick edge. */
+.ct-input[aria-invalid='true'],
+.ct-textarea[aria-invalid='true'] {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+
+/* Errors use the single accent plus weight and an icon. No second hue. */
+.ct-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--accent-text);
+}
+
+.ct-error svg {
+  flex: none;
+  margin-top: 0.15em;
+}
+
+/* --- Submit row and its loading shape ------------------------------- */
+
+.ct-submit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.ct-sending {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.ct-sending__bar {
+  height: 3rem;
+  width: 14rem;
+  max-width: 100%;
+}
+
+.ct-sending__bar--text {
+  height: 0.875rem;
+  width: 22ch;
+}
+
+/* --- Success -------------------------------------------------------- */
+
+.ct-success {
+  display: grid;
+  gap: var(--space-6);
+  justify-items: start;
+}
+
+.ct-success__icon {
+  color: var(--accent-text);
+}
+
+.ct-success__body {
+  color: var(--text-2);
+  max-width: 46ch;
+}
+
+/* --- Single column below md, declared explicitly -------------------- */
+
+@media (max-width: 767px) {
+  .ct-split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-12);
+  }
+
+  .ct-aside,
+  .ct-panel {
+    grid-column: 1 / -1;
+  }
+}

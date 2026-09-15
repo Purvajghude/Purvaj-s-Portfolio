@@ -1,0 +1,236 @@
+/* ============================================================
+   WORK DETAIL - one reusable case study template. Prefix: wd-
+   Every multi-column block collapses to one column below 768px.
+   ============================================================ */
+
+.wd-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-2);
+  text-decoration: none;
+}
+
+.wd-back:hover {
+  color: var(--accent-text);
+}
+
+.wd-back svg {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.wd-back:hover svg {
+  transform: translateX(-2px);
+}
+
+/* --- Title block. Headline and summary stack, never side by side. -- */
+
+.wd-title {
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem);
+}
+
+.wd-title__heading {
+  max-width: 16ch;
+}
+
+.wd-title__summary {
+  margin-top: var(--space-8);
+}
+
+/* --- Meta row ------------------------------------------------------ */
+
+.wd-meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-8) var(--gutter);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line-strong);
+}
+
+.wd-meta__value {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  color: var(--accent-text);
+}
+
+/* --- Hero image ---------------------------------------------------- */
+
+.wd-hero {
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  background: var(--ground-2);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.wd-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Prose blocks. Offsets carry the asymmetry, not floating text. - */
+
+.wd-body {
+  padding-top: 0;
+}
+
+.wd-block {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  border-top: 1px solid var(--line);
+}
+
+/* The first block opens the page, so it carries no rule. */
+.wd-block--lead {
+  border-top: 0;
+}
+
+.wd-block__inner--problem { grid-column: 1 / 9; }
+.wd-block__inner--process { grid-column: 3 / 13; }
+.wd-block__inner--outcome { grid-column: 1 / 13; }
+
+.wd-block__heading {
+  margin-bottom: var(--space-8);
+}
+
+/* --- Process steps -------------------------------------------------- */
+
+.wd-step {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: var(--gutter);
+  padding-block: var(--space-8);
+}
+
+.wd-step + .wd-step {
+  border-top: 1px solid var(--line);
+}
+
+/* --- Outcome -------------------------------------------------------- */
+
+.wd-outcome {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+.wd-outcome__prose { grid-column: 1 / 7; }
+.wd-outcome__figures { grid-column: 8 / 13; }
+
+.wd-figure {
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--accent);
+}
+
+.wd-figure + .wd-figure {
+  margin-top: var(--space-8);
+}
+
+.wd-figure__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.wd-figure__label {
+  margin-top: var(--space-2);
+}
+
+/* --- Next and previous ---------------------------------------------- */
+
+.wd-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gutter);
+  padding-top: var(--space-12);
+  border-top: 1px solid var(--line-strong);
+}
+
+.wd-nav__link {
+  display: grid;
+  gap: var(--space-3);
+  color: inherit;
+  text-decoration: none;
+}
+
+.wd-nav__link--next {
+  justify-items: end;
+  text-align: right;
+}
+
+.wd-nav__dir {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.wd-nav__link:hover .wd-nav__title {
+  color: var(--accent-text);
+}
+
+.wd-nav__link:active {
+  transform: translateY(1px);
+}
+
+.wd-nav__title {
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+/* --- Not found state ------------------------------------------------ */
+
+.wd-notfound {
+  padding-block: clamp(6rem, 14vw, 10rem);
+}
+
+/* --- Single column below md, declared explicitly -------------------- */
+
+@media (max-width: 767px) {
+  .wd-meta {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+
+  .wd-block {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wd-block__inner--problem,
+  .wd-block__inner--process,
+  .wd-block__inner--outcome {
+    grid-column: 1 / -1;
+  }
+
+  .wd-step {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .wd-outcome {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wd-outcome__prose,
+  .wd-outcome__figures {
+    grid-column: 1 / -1;
+  }
+
+  .wd-nav {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+
+  .wd-nav__link--next {
+    justify-items: start;
+    text-align: left;
+  }
+}
