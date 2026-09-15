@@ -3836,6 +3836,9 @@ mark {
 }
 
 @media print {
+  @page { size: A4; margin: 12mm; }
+  html, body { background: #fff !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
   .site-header,
   .site-footer,
   .page-hero,

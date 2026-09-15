@@ -82,6 +82,11 @@ const MOTION = {
 };
 
 export default function Resume() {
+  const handlePrint = () => {
+    // Give the browser a frame to apply the print stylesheet before opening its dialog.
+    requestAnimationFrame(() => window.print());
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -105,7 +110,7 @@ export default function Resume() {
 
           <motion.section className="resume-wrap reveal revealed" {...MOTION}>
             <div className="resume-actions">
-              <button className="button" type="button" onClick={() => window.print()}>
+              <button className="button" type="button" onClick={handlePrint}>
                 Print / Save PDF
               </button>
               <a
