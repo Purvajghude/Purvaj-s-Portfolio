@@ -9,6 +9,7 @@ import Work from './pages/Work';
 import Resume from './pages/Resume';
 import WorkLnMusicSchool from './pages/WorkLnMusicSchool';
 import WorkSvgSpriteCompiler from './pages/WorkSvgSpriteCompiler';
+import Header from './components/Header';
 
 
 function ScrollToTop() {
@@ -52,6 +53,7 @@ export default function App() {
     <Router>
       <ScrollToTop />
       <div className="app-container">
+        <Header darkMode={darkMode} toggleDarkMode={() => setDarkMode((current) => !current)} />
         <button 
           onClick={() => setDarkMode(!darkMode)}
           className="dark-mode-toggle"
